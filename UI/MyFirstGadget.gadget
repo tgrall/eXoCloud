@@ -2,4 +2,42 @@
 <Module>
 <ModulePrefs title="My First Gadget" description="A very simple Open Social Gadget"/>
 <Content type="html">
-<![CDATA[ Hello, world! ]]></Content></Module>
+<![CDATA[ 
+ 
+    <script type="text/javascript">
+      var serverUrl = "http://tugdual.cloud-ide.com/IDE/rest/private/resource"; 
+      
+      function printMessage(response) {
+        var zone = document.getElementById("messageZone");
+        zone.innerHTML = response.text;
+      }
+      
+      function callService(name) {
+        var url = serverUrl +"/hello/"+ name;
+         var params = { };
+        params[gadgets.io.RequestParameters.METHOD] = "GET";
+        gadgets.io.makeRequest(url, printMessage, params);       
+        
+      }
+      
+      
+      function sayHello(){
+        var name = document.getElementById("contact_name").value;
+        callService(name);
+        
+      }
+
+
+    </script>
+    <div style="width :600px; text-align:center; background-color:#e8ecf0; margin: 0 auto; padding:5 0 20 0 " id="administration_id"  >
+      <p><h3 align="center" style="margin:0 0 -20 80; color:#152951">Add new contact</h3></p><br/>
+      <table width="65%" height="25%" id="manage_phonebook" style="margin:0 auto; text-align:center" >
+        <tr><td align="right" style="width:25%; padding-bottom:10px; font-size:15px">Name:</td><td><input style="width:100%; margin-bottom:10px; height:28px; border: 1px solid #3375b9" type="text" name="contact_name" id="contact_name"></td></tr>
+        <tr><td align="right" colspan="2"><input type="button" value="Add new contact" onClick="sayHello();"/></td></tr>
+      </table>
+      <div id="messageZone" style="margin-top:10px">
+    </div>
+
+  </div>
+  
+  ]]></Content></Module>
